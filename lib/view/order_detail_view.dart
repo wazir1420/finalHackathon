@@ -135,7 +135,7 @@ class OrderDetailView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 15),
+                            SizedBox(height: he * 0.01),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -155,7 +155,7 @@ class OrderDetailView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: he * 0.01),
                             SizedBox(
                               width: double.infinity,
                               height: he * 0.08,
@@ -248,7 +248,7 @@ Widget itemContainerWithQuantity(
       ),
       Positioned(
         right: 10,
-        bottom: 40,
+        bottom: 20,
         child: Row(
           children: [
             GestureDetector(

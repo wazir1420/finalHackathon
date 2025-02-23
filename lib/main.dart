@@ -1,5 +1,3 @@
-import 'package:finalhackathon/view/home_view.dart';
-import 'package:finalhackathon/view/map_view.dart';
 import 'package:finalhackathon/view/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // navigatorKey: StackedService.navigatorKey,
       // onGenerateRoute: StackedRouter().onGenerateRoute,
-      home: MapView(),
+      home: SplashView(),
     );
   }
 }

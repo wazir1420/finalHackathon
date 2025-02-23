@@ -228,7 +228,7 @@ class HomeView extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            width: 60,
+                            width: we * 0.1,
                           ),
                           Text(
                             '\$15',
@@ -380,7 +380,7 @@ Widget customContainer(BuildContext context,
   var he = MediaQuery.of(context).size.height;
   var we = MediaQuery.of(context).size.width;
   return Container(
-    height: he * 0.3,
+    height: he * 0.32,
     width: we * 0.45,
     decoration: BoxDecoration(
         border: Border.all(width: 2, color: Colors.grey.shade200),

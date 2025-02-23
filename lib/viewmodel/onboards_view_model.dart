@@ -1,4 +1,4 @@
-import 'package:finalhackathon/view/home_view.dart';
+import 'package:finalhackathon/view/map_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -44,7 +44,7 @@ class OnboardsViewModel extends BaseViewModel {
       Navigator.pushReplacement(
         // ignore: use_build_context_synchronously
         context,
-        MaterialPageRoute(builder: (context) => const HomeView()),
+        MaterialPageRoute(builder: (context) => MapsView()),
       );
     } on FirebaseAuthException catch (e) {
       String errorMessage = 'Login failed. Please try again.';
@@ -81,6 +81,7 @@ class OnboardsViewModel extends BaseViewModel {
       );
       debugPrint("User registered: ${userCredential.user!.uid}");
 
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Registration successful!'),
@@ -89,8 +90,9 @@ class OnboardsViewModel extends BaseViewModel {
       );
 
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
-        MaterialPageRoute(builder: (context) => const HomeView()),
+        MaterialPageRoute(builder: (context) => const MapsView()),
       );
     } on FirebaseAuthException catch (e) {
       debugPrint("FirebaseAuthException: ${e.code} - ${e.message}");
@@ -100,6 +102,7 @@ class OnboardsViewModel extends BaseViewModel {
       } else if (e.code == 'email-already-in-use') {
         errorMessage = 'An account already exists for this email.';
       }
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),
@@ -108,6 +111,7 @@ class OnboardsViewModel extends BaseViewModel {
       );
     } catch (e) {
       debugPrint("Unexpected error: $e");
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error: $e'),
