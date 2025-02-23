@@ -1,3 +1,4 @@
+import 'package:finalhackathon/view/home_view.dart';
 import 'package:finalhackathon/view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:finalhackathon/app/app.locator.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // navigatorKey: StackedService.navigatorKey,
       // onGenerateRoute: StackedRouter().onGenerateRoute,
-      home: SplashView(),
+      home: HomeView(),
     );
   }
 }
