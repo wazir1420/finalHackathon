@@ -1,66 +1,44 @@
+import 'package:finalhackathon/viewmodel/map_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:stacked/stacked.dart';
 
-class MapView extends StatefulWidget {
+class MapView extends StatelessWidget {
   const MapView({super.key});
 
   @override
-  State<MapView> createState() => _MapViewState();
-}
-
-class _MapViewState extends State<MapView> {
-  static LatLng cliftonBeach = const LatLng(24.8135, 66.9988);
-  String address = 'Karachi';
-
-  Future<void> setMarker(LatLng value) async {
-    debugPrint('Setting marker at: ${value.latitude}, ${value.longitude}');
-    try {
-      List<Placemark> result =
-          await placemarkFromCoordinates(value.latitude, value.longitude);
-      if (result.isNotEmpty) {
-        debugPrint(
-            'Address: ${result[0].name}, ${result[0].locality}, ${result[0].administrativeArea}');
-        setState(() {
-          cliftonBeach = value;
-          address =
-              '${result[0].name}, ${result[0].locality}, ${result[0].administrativeArea}';
-        });
-      }
-    } catch (e) {
-      debugPrint('Geocoding error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to fetch address: $e')),
-      );
-    }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(address)),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: cliftonBeach,
-          zoom: 12,
-        ),
-        markers: {
-          Marker(
-            markerId: const MarkerId('1'),
-            position: cliftonBeach,
-            draggable: true,
-            infoWindow: InfoWindow(title: address),
-            onDragEnd: (value) {
-              setMarker(value);
+    return ViewModelBuilder<MapViewModel>.reactive(
+      viewModelBuilder: () => MapViewModel(),
+      onViewModelReady: (viewModel) {
+        viewModel.addListener(() {
+          if (viewModel.address.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  viewModel.address,
+                  style: TextStyle(color: Colors.black),
+                ),
+                backgroundColor: Colors.grey.shade300,
+              ),
+            );
+          }
+        });
+      },
+      builder: (context, viewModel, child) {
+        return Scaffold(
+          body: GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: viewModel.currentLocation,
+              zoom: 12,
+            ),
+            markers: viewModel.markers,
+            onTap: (value) {
+              viewModel.setMarker(value);
             },
           ),
-        },
-        onTap: (value) {
-          setMarker(value);
-        },
-      ),
+        );
+      },
     );
   }
 }
