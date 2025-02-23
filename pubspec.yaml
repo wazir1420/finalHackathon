@@ -38,7 +38,9 @@ dependencies:
   stacked_services: ^1.6.0
   firebase_auth: ^5.5.0
   firebase_core: ^3.10.1
-
+  google_maps_flutter: ^2.10.0
+  geocoding: ^3.0.0
+  fluttertoast: ^8.2.12
 dev_dependencies:
   flutter_test:
     sdk: flutter

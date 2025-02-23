@@ -9,6 +9,7 @@ class OnboardsViewModel extends BaseViewModel {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   bool get isCreateAccount => _isCreateAccount;
   bool get isObscured => _isObscured;
@@ -72,14 +73,14 @@ class OnboardsViewModel extends BaseViewModel {
 
   Future<void> register(BuildContext context) async {
     try {
-      // ignore: unused_local_variable
+      debugPrint("Attempting to register user...");
       final UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      debugPrint("User registered: ${userCredential.user!.uid}");
 
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Registration successful!'),
@@ -88,18 +89,17 @@ class OnboardsViewModel extends BaseViewModel {
       );
 
       Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) => const HomeView()),
       );
     } on FirebaseAuthException catch (e) {
+      debugPrint("FirebaseAuthException: ${e.code} - ${e.message}");
       String errorMessage = 'Registration failed. Please try again.';
       if (e.code == 'weak-password') {
         errorMessage = 'The password is too weak.';
       } else if (e.code == 'email-already-in-use') {
         errorMessage = 'An account already exists for this email.';
       }
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),
@@ -107,7 +107,7 @@ class OnboardsViewModel extends BaseViewModel {
         ),
       );
     } catch (e) {
-      // ignore: use_build_context_synchronously
+      debugPrint("Unexpected error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error: $e'),
@@ -270,7 +270,9 @@ class OnboardsViewModel extends BaseViewModel {
         ),
         const SizedBox(height: 5),
         TextField(
-          controller: label == "Email" ? emailController : passwordController,
+          controller: label == "Full Name"
+              ? nameController
+              : (label == "Email" ? emailController : passwordController),
           obscureText: obscureText,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),

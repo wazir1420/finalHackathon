@@ -78,4 +78,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'myfirstproject-4c178.firebasestorage.app',
     iosBundleId: 'com.example.finalhackathon',
   );
+
 }

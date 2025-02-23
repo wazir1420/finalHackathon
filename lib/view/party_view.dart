@@ -65,7 +65,7 @@ class PartyView extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
@@ -78,7 +78,7 @@ class PartyView extends StatelessWidget {
                         },
                         child: Ink(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(10),
                             gradient: LinearGradient(
                               colors: [Color(0xFFFF5757), Color(0xFFFFD687)],
                               begin: Alignment.topLeft,
