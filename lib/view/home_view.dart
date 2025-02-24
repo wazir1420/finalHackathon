@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  final String selectedAddress;
+
+  HomeView({super.key, required this.selectedAddress});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class HomeView extends StatelessWidget {
                           children: [
                             Image.asset('assets/images/Frame.png'),
                             const SizedBox(width: 5),
-                            const Text('Freedom way, Lekki phase'),
+                            Text(selectedAddress),
                           ],
                         ),
                         const CircleAvatar(

@@ -123,7 +123,9 @@ class MapsView extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeView()));
+                                    builder: (context) => HomeView(
+                                          selectedAddress: viewModel.address,
+                                        )));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFD61355),
